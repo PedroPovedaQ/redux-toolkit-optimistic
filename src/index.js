@@ -13,13 +13,13 @@ export function performOptimisticUpdate(state, adapter, update) {
     if (typeof id !== "string" || typeof changes !== "object") {
         throw incorrectUpdateArgError
     }
-  
+
     // Store the previous data to handle rejection of optimistic update
     state.entities[id].previousChanges = Object.keys(changes).reduce((acc, key) => {
       acc[key] = state.entities[id][key]
       return acc
     }, {})
-  
+
     adapter.updateOne(state, update);
 }
 
@@ -60,7 +60,7 @@ export function revertOptimisticUpdate(state, adapter, id) {
         throw new Error("Incorrect `id` arg sent to `revertOptimisticUpdate`. Expected: <string>")
     }
 
-    const previousChanges = state.entities[id].previousChanges
+    const previousChanges = state?.entities[id]?.previousChanges
     if (!previousChanges) return
 
     adapter.updateOne(state, {
@@ -81,7 +81,7 @@ export function revertManyOptimisticUpdates(state, adapter, ids) {
     }
 
     const update = ids.map(id => {
-        const changes = state.entities[id].previousChanges
+        const changes = state?.entities[id]?.previousChanges
         if (!changes) return null
         return { id, changes }
     }).filter(Boolean)

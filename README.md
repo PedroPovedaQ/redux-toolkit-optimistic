@@ -9,11 +9,11 @@ Simple helper library for use with [Redux Toolkit](https://redux-toolkit.js.org/
 
 Example Redux code:
 ```js
-import { createAsyncThunk, createEntityAdapter, createSelectorm createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { performOptimisticUpdate, revertOptimisticUpdate } from 'redux-toolkit-optimistic'
 
 export const myFunction = createAsyncThunk('mySlice/myFunction', async ({ id, changes }) => {
-    return await someApiCall(id, changes)
+    await someApiCall(id, changes)
 })
 
 const myAdapter = createEntityAdapter()
