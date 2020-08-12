@@ -1,5 +1,6 @@
-import webpack from 'webpack';
-import path from 'path';
+/* eslint-disable */
+const webpack = require('webpack');
+const path = require('path');
 
 const { NODE_ENV } = process.env;
 
@@ -9,20 +10,18 @@ const plugins = [
   }),
 ];
 
-const filename = `redux-tookit-optimistic${NODE_ENV === 'production' ? '.min' : ''}.js`;
+const filename = `redux-tookit-optimistic${
+  NODE_ENV === 'production' ? '.min' : ''
+}.js`;
 
-export default {
+module.exports = {
   mode: NODE_ENV === 'production' ? 'production' : 'development',
 
   module: {
-    rules: [
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-    ],
+    rules: [{ test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }],
   },
 
-  entry: [
-    './src/index',
-  ],
+  entry: ['./src/index'],
 
   optimization: {
     minimize: NODE_ENV === 'production',
