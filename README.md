@@ -36,7 +36,7 @@ import {
 export const myFunction = createAsyncThunk(
   'mySlice/myFunction',
   async ({ id, changes }) => {
-    await someApiCall(id, changes);
+    await persistChangesToDb(id, changes);
   },
 );
 
@@ -47,9 +47,9 @@ const mySlice = createSlice({
   reducers: {},
   extraReducers: {
     [myFunction.pending]: (state, action) =>
-      performOptimisticUpdate(state, myAdapter, action.meta.arg.payload),
+      performOptimisticUpdate(state, myAdapter, action.meta.arg),
     [myFunction.rejected]: (state, action) =>
-      revertOptimisticUpdate(state, myAdapter, action.meta.arg.payload.id),
+      revertOptimisticUpdate(state, myAdapter, action.meta.arg.id),
   },
 });
 
@@ -64,10 +64,8 @@ import { myFunction } from '../path/to/state';
 
 dispatch(
   myFunction({
-    payload: {
-      id: 'someId',
-      changes: { someKey: 'new value' },
-    },
+    id: 'someId',
+    changes: { someKey: 'new value' },
   }),
 );
 ```

@@ -1,6 +1,6 @@
 {
   "name": "redux-toolkit-optimistic",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "description": "Helper library for Redux Toolkit to perform optimistic updates.",
   "author": "Rob Wilson <robwilson101@gmail.com>",
