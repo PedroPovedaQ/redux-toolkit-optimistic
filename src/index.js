@@ -5,14 +5,14 @@
  */
 export function performOptimisticUpdate(state, adapter, update) {
   const incorrectUpdateArgError = new Error(
-    'Incorrect `update` arg sent to `performOptimisticUpdate`. Expected: { id: <string>, changes: <object> }',
+    'Incorrect `update` arg sent to `performOptimisticUpdate`. Expected: { id: <string || number>, changes: <object> }',
   );
   if (!update || typeof update !== 'object') {
     throw incorrectUpdateArgError;
   }
 
   const { id, changes } = update;
-  if (typeof id !== 'string' || typeof changes !== 'object') {
+  if ((typeof id !== 'string' || typeof id !== 'number') || typeof changes !== 'object') {
     throw incorrectUpdateArgError;
   }
 
